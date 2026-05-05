@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Qargo Unavailability Sync Service/1.0.0": {
+        "runtime": {
+          "Qargo Unavailability Sync Service.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Qargo Unavailability Sync Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

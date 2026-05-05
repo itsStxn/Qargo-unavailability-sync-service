@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>Root</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Core/" />
+    <Folder Include="DTOs/" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Polly" Version="8.6.6" />
+  </ItemGroup>
+</Project>

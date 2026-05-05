@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "h/RobXHAAF0=",
+  "success": true,
+  "projectFilePath": "/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/Qargo Unavailability Sync Service.csproj",
+  "expectedPackageFiles": [
+    "/home/ssandjo/.nuget/packages/polly/8.6.6/polly.8.6.6.nupkg.sha512",
+    "/home/ssandjo/.nuget/packages/polly.core/8.6.6/polly.core.8.6.6.nupkg.sha512"
+  ],
+  "logs": []
+}

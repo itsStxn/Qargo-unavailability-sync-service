@@ -1,0 +1,14 @@
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/bin/Debug/net10.0/Qargo Unavailability Sync Service
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/bin/Debug/net10.0/Qargo Unavailability Sync Service.deps.json
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/bin/Debug/net10.0/Qargo Unavailability Sync Service.runtimeconfig.json
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/bin/Debug/net10.0/Qargo Unavailability Sync Service.dll
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/bin/Debug/net10.0/Qargo Unavailability Sync Service.pdb
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/Qargo Unavailability Sync Service.GeneratedMSBuildEditorConfig.editorconfig
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/Qargo Unavailability Sync Service.AssemblyInfoInputs.cache
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/Qargo Unavailability Sync Service.AssemblyInfo.cs
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/Qargo Unavailability Sync Service.csproj.CoreCompileInputs.cache
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/Qargo Unavailability Sync Service.dll
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/refint/Qargo Unavailability Sync Service.dll
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/Qargo Unavailability Sync Service.pdb
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/Qargo Unavailability Sync Service.genruntimeconfig.cache
+/home/ssandjo/Dev/projects/Qargo Unavailability Sync Service/obj/Debug/net10.0/ref/Qargo Unavailability Sync Service.dll
