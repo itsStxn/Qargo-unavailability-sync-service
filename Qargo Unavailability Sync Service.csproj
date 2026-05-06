@@ -7,10 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Core/" />
-    <Folder Include="DTOs/" />
+    <Folder Include="Constants/" />
+    <Folder Include="Utils/" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.2.0" />
     <PackageReference Include="Polly" Version="8.6.6" />
   </ItemGroup>
 </Project>

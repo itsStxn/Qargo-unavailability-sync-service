@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Qargo Unavailability Sync Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c2330d68d7e0ebed7f4dab033f5aed5841342baa")]
 [assembly: System.Reflection.AssemblyProductAttribute("Qargo Unavailability Sync Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Qargo Unavailability Sync Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
