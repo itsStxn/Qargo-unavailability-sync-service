@@ -9,13 +9,14 @@ Only entries that fall in the year **2025** are considered.
 
 1. Architecture Overview
 2. Key Design Patterns
-3. Prerequisites
-4. Configuration (.env)
-5. Building & Running
-6. Error Handling & Logging
-7. Security Considerations
-8. Extending the Tool
-9. License
+3. Assumptions
+4. Prerequisites
+5. Configuration (.env)
+6. Building & Running
+7. Error Handling & Logging
+8. Security Considerations
+9.  Extending the Tool
+11. License
 
 ---
 
@@ -60,7 +61,30 @@ Program.cs
 
 ---
 
-# 3. Prerequisites
+# 3. Assumptions
+
+* Only **unavailability data** is synchronized; resource entities themselves remain unchanged.
+* Synchronisation direction is strictly **Master → Qargo**, where the master system is the source of truth and Qargo is the target.
+* The master environment is treated as **read-only** for this integration; only **GET operations** are performed against it.
+* Any **orphan unavailability entries** in Qargo (i.e. records with an `external_id` that does not exist in the master dataset) are intentionally preserved, as they may originate from other upstream systems.
+* The `external_id` field is assumed to uniquely identify an unavailability within the scope of a resource.
+* Cross-environment resource matching is based on **resource name**, not on internal system identifiers.
+* Only unavailability records with a time window in **calendar year 2025** are considered relevant for synchronization.
+* A missing `external_id` implies the record has **no external provenance** and is not part of the master-managed dataset.
+* Pagination is implemented using a cursor-based mechanism and is considered complete when either:
+
+  * the returned `cursor` is `null`, or
+  * the returned `items` collection is empty.
+* When using cursor-based pagination, additional query parameters are avoided to ensure consistency with API expectations and prevent unstable paging behavior.
+* The `external_id` in Qargo is assumed to be equivalent to the **master record identifier**, enabling deterministic matching between systems.
+* Database and API operations are optimized for efficiency:
+
+  * Only **update operations** are executed when a matching `external_id` exists *and* at least one relevant field differs
+  * Redundant writes are intentionally avoided to reduce load and improve performance
+
+---
+
+# 4. Prerequisites
 
 | Requirement           | Version / Notes                     |
 | --------------------- | ----------------------------------- |
@@ -73,7 +97,7 @@ Program.cs
 
 ---
 
-# 4. Configuration (.env)
+# 5. Configuration (.env)
 
 Create a `.env` file in the repository root (ignored by git):
 
@@ -91,7 +115,7 @@ Only these four variables are required and loaded at startup via `EnvSource`.
 
 ---
 
-# 5. Building & Running
+# 6. Building & Running
 
 ## Restore dependencies
 
@@ -134,7 +158,7 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
 ---
 
-# 6. Error Handling & Logging
+# 7. Error Handling & Logging
 
 * Custom exceptions:
 
@@ -160,7 +184,7 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
 ---
 
-# 7. Security Considerations
+# 8. Security Considerations
 
 * OAuth2 client-credentials flow (no hardcoded secrets)
 * Secrets stored only in `.env`
@@ -171,7 +195,7 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
 ---
 
-# 8. Extending the Tool
+# 9. Extending the Tool
 
 ### Add new resource types
 
@@ -217,7 +241,7 @@ This approach ensures deterministic execution, avoids cron’s restricted execut
 
 ---
 
-# 9. License
+# 10. License
 
 The starter code is provided by **Qargo** for interview purposes.
 You may modify, extend, or redistribute it for the assignment.
