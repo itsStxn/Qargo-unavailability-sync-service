@@ -13,7 +13,7 @@ public class Tenant : Base, ITenant {
 		_name = name;
 	}
 
-	public Task<Resource?> GetResourcesAsync() {
+	public Task<ResourceList?> GetResourcesAsync() {
 		// TODO: code...
 		return default;
 	}

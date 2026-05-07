@@ -30,7 +30,7 @@ public class MyAuthRequest : MyRequest {
 			Encoding.UTF8.GetBytes($"{_clientId}:{_secret}"));
 
 		// ? Get and validate response
-		var data = await SendAsync<AccessTokenResponse>(() => {
+		var data = await SendAsync<AccessToken>(() => {
 			// ? Build request
 			var req = new HttpRequestMessage(HttpMethod.Post, "auth/token");
 			req.Headers.Authorization = new AuthenticationHeaderValue("Basic", cred);
@@ -38,7 +38,7 @@ public class MyAuthRequest : MyRequest {
 			return req;
 		});
 
-		_accessToken = data.AccessToken.Trim();
+		_accessToken = data.Token.Trim();
 		_atc.Create(_accessToken);
 	}
 
