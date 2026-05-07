@@ -185,12 +185,35 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
 ### Scheduling
 
-* Run via cron (e.g. every 15 minutes)
+* **Publish the service** using the Release build step described above (`dotnet publish`). This produces a self-contained executable (or framework-dependent binary, depending on configuration) in the output directory.
 
-### Testing
+* **Execute the published binary manually** to validate it works outside of the build context. The service can be run directly from the publish folder by invoking its absolute or relative path, e.g.:
 
-* Inject mock `HttpClient`
-* Use interface-based service design for unit tests
+  ```bash
+  ./out/Qargo\ Unavailability\ Sync\ Service
+  ```
+
+* **Integrate with cron for scheduled execution** (e.g. every 15 minutes) by referencing the absolute path of the published binary in a crontab entry. Since cron runs in a minimal shell environment, avoid relying on relative paths or environment assumptions.
+
+* **Recommended cron pattern (robust execution):**
+  Ensure the working directory is explicitly set before execution to avoid path-related issues (e.g., missing `.env`, logs, or cache directories):
+
+  ```bash
+  */15 * * * * cd /absolute/path/to/publish/dir && ./QargoUnavailabilitySyncService >> /var/log/qargo-sync.log 2>&1
+  ```
+
+* **Key considerations:**
+
+  * Always use **absolute paths** in cron jobs.
+  * Explicitly `cd` into the application directory so relative file dependencies (e.g., `.env`, `Logs/`, `Cache/`) resolve correctly.
+  * Redirect `stdout` and `stderr` to a log file for observability and debugging.
+  * Ensure the binary has execute permissions (`chmod +x` if needed).
+  * If environment variables are required, either:
+
+    * load them via `.env` inside the application (as implemented), or
+    * explicitly source them in the cron command.
+
+This approach ensures deterministic execution, avoids cron’s restricted execution context pitfalls, and keeps logging and configuration consistent with local runs.
 
 ---
 
