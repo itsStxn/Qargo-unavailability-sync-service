@@ -3,7 +3,9 @@ using Root.DTOs;
 using Root.Source;
 using Root.Errors;
 using Root.Core.Interfaces;
+using static Root.Constants.Constants;
 using Root.DTOs.ResourceListComponents;
+using Root.DTOs.UnavailabilityListComponents;
 
 namespace Root.Core;
 
@@ -41,16 +43,36 @@ public class Tenant : Base, ITenant {
 			throw AppException.Label<AppException>(ex, Msg(ex.Message));
 		}
 	}
-	public async Task<T> GetUnavailabilitiesAsync<T>(string resourceId) {
-		// TODO: code...
-		// try {
-		// 	var data = await _auth.SendAsync<ResourceList>(() =>
-		// 		new HttpRequestMessage(HttpMethod.Get, "resources/resource"));
-		// 	return data;
-		// }
-		// catch (Exception ex) {
-		// 	throw AppException.Label<AppException>(ex, Msg(ex.Message));
-		// }
-		return default;
+
+	public async Task<List<Unavailability>> GetUnavailabilitiesAsync(string resourceId) {
+		var unavails = new List<Unavailability>();
+		string? next = null;
+		UnavailabilityList data;
+		
+		try {
+			do {
+				// ? Prepare uri
+				var path = $"resources/resource/{resourceId}/unavailability";
+				path += next == null ? string.Empty : $"?cursor={next}";
+				
+				// ? Fetch resources
+				data = await _auth.SendAsync<UnavailabilityList>(() =>
+					new HttpRequestMessage(HttpMethod.Get, path));
+				
+				// ? Filter by year and store
+				unavails.AddRange(data.Items.Where(u => 
+					u.StartTime.Contains(UNAVAIL_YEAR) && 
+					(u.EndTime ?? string.Empty).Contains(UNAVAIL_YEAR)
+				));
+
+				// ? Run until no cursor is found
+				next = data.NextCursor;
+			}
+			while (next != null && data.Items.Count > 0);
+			return unavails;
+		}
+		catch (Exception ex) {
+			throw AppException.Label<AppException>(ex, Msg(ex.Message));
+		}
 	}
 }

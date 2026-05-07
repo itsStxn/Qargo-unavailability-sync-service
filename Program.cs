@@ -16,10 +16,6 @@ class Program {
 			// ? Define tenants
 			var qargo = new QargoService(ctx);
 			var master = new MasterService(ctx);
-
-			// Test 082f21c5-a2f5-48c0-8d28-8c9fb60ade52
-			var res = await qargo.GetResourcesAsync();
-			AccessTokenUtil.PrintPretty(res);
 		}
 		catch (NetworkException ex) {
 			Log.Fatal(ex, "Network failure {StatusCode} after all retry attempts — {Message}",

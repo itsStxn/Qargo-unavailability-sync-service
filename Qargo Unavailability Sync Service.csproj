@@ -9,7 +9,6 @@
   <ItemGroup>
     <Folder Include="Cache/" />
     <Folder Include="Constants/" />
-    <Folder Include="DTOs/UnavailabilityComponents/" />
     <Folder Include="Errors/" />
     <Folder Include="Errors/Interfaces/" />
     <Folder Include="Logs/" />

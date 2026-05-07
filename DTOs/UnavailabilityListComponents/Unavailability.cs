@@ -1,8 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
-using Root.DTOs.ResourceListComponents;
 
-namespace Root.DTOs;
+namespace Root.DTOs.UnavailabilityListComponents;
 
 public class Unavailability {
 	[JsonPropertyName("id")]

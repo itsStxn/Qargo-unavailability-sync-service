@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json.Serialization;
 
-namespace Root.DTOs.ResourceListComponents;
+namespace Root.DTOs.UnavailabilityListComponents;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Reason {
