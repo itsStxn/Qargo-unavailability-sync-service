@@ -2,7 +2,7 @@ using System;
 
 namespace Root.Utils.Interfaces;
 
-public interface IAccessTokenCache {
-	public string Read();
-	public void Create(string token);
+public interface IAccessTokenUtil {
+	public string ReadCache();
+	public void CreateCache(string token);
 }

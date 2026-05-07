@@ -1,6 +1,5 @@
 using Polly;
 using System;
-using System.Net;
 using Root.Source;
 using Polly.Retry;
 using Root.Errors;
@@ -76,7 +75,7 @@ public class MyRequest : Base, IMyRequest {
 			throw new NetworkException(
 				message: 	Msg($"Request to {fullUri()} failed: {ex.StatusCode} {ex.Message}"), 
 				retryAfter: res?.Headers.RetryAfter?.Delta,
-				statusCode: HttpStatusCode.Unauthorized,
+				statusCode: ex.StatusCode,
 				inner: 		ex); 
 		}
 

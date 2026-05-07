@@ -4,19 +4,18 @@ using Root.DTOs;
 using Root.Errors;
 using System.Text.Json;
 using Root.Utils.Interfaces;
+using static Root.Constants.Constants;
 
 namespace Root.Utils;
 
-public class AccessTokenCache : IAccessTokenCache {
+public class AccessTokenUtil : IAccessTokenUtil {
 	private readonly string _filePath;
-	public JsonSerializerOptions Options;
 
-	public AccessTokenCache(string fileName) {
+	public AccessTokenUtil(string fileName) {
 		_filePath = $"./Cache/{fileName.ToLower()}-access-token.json";
-		Options = new JsonSerializerOptions { WriteIndented = true };
 	}
 
-	public string Read() {
+	public string ReadCache() {
 		// ? Early exit
 		if (!File.Exists(_filePath)) {
 			return string.Empty;
@@ -46,7 +45,7 @@ public class AccessTokenCache : IAccessTokenCache {
 		return data.AccessToken;
 	}
 
-	public void Create(string token) {
+	public void CreateCache(string token) {
 		// ? Validate token
 		if (token.Length == 0)
 			throw new ConfigException("Access token cannot be empty");
@@ -57,7 +56,25 @@ public class AccessTokenCache : IAccessTokenCache {
 		};
 
 		// ? Rewrite cache
-		var json = JsonSerializer.Serialize(data, Options);
+		var json = JsonSerializer.Serialize(data, JSON_OPTIONS);
 		File.WriteAllText(_filePath, json);
+	}
+
+	public static void PrintPretty(string json) {
+		// ? Validate string json
+		if (string.IsNullOrWhiteSpace(json))
+			throw new ConfigException("JSON input is empty");
+
+		// ? Json serialization
+		try {
+			using JsonDocument document = JsonDocument.Parse(json);
+
+			string prettyJson = JsonSerializer.Serialize(
+				document.RootElement, JSON_OPTIONS);
+			Console.WriteLine(prettyJson);
+		}
+		catch (JsonException ex) {
+			throw new ParseException("JSON input is empty", ex);
+		}
 	}
 }

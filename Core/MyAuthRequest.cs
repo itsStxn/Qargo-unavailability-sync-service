@@ -14,11 +14,11 @@ public class MyAuthRequest : MyRequest {
 	private readonly string _clientId;
 	private readonly string _secret;
 	private string _accessToken;
-	private readonly AccessTokenCache _atc;
+	private readonly AccessTokenUtil _atu;
 
 	public MyAuthRequest(string name, string clientId, string secret, RequestSource rs) : base(rs) {
-		_atc = new AccessTokenCache(name);
-		_accessToken = _atc.Read();
+		_atu = new AccessTokenUtil(name);
+		_accessToken = _atu.ReadCache();
 		_clientId = clientId;
 		_secret = secret;
 		_name = name;
@@ -39,7 +39,7 @@ public class MyAuthRequest : MyRequest {
 		});
 
 		_accessToken = data.Token.Trim();
-		_atc.Create(_accessToken);
+		_atu.CreateCache(_accessToken);
 	}
 
 	protected override async Task<NetworkException> OnRetryAsync(Exception ex, TimeSpan delay) {

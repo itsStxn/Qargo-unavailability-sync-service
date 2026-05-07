@@ -18,7 +18,9 @@ public class Base {
 	}
 
 	public string Msg(string text) {
-		return $"(service: {_name}) >> {text}";
+		string trimmed = text.Trim();
+		if (trimmed.StartsWith("(service: ")) return trimmed;
+		return $"(service: {_name}) >> {trimmed}";
 	}
 
 	public void Echo(string text) {

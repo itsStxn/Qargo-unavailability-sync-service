@@ -13,11 +13,11 @@ public class Tenant : Base, ITenant {
 		_name = name;
 	}
 
-	public Task<ResourceList?> GetResourcesAsync() {
+	public Task<ResourceList> GetResourcesAsync() {
 		// TODO: code...
 		return default;
 	}
-	public Task<T?> GetUnavailabilitiesAsync<T>(string resourceId) {
+	public Task<T> GetUnavailabilitiesAsync<T>(string resourceId) {
 		// TODO: code...
 		return default;
 	}
