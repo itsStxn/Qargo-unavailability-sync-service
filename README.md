@@ -256,7 +256,6 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
   cd "/absolute/path/to/project" || exit 1
 
-  # Prevent overlapping runs by locking and skipping concurrent executions
   flock -n /tmp/qargo-sync.lock \
   /usr/bin/dotnet "/absolute/path/to/project/publish/QargoUnavailabilitySyncService.dll"
   ```
