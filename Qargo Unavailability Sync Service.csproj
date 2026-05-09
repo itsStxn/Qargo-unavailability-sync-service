@@ -13,8 +13,6 @@
     <Folder Include="Errors/" />
     <Folder Include="Errors/Interfaces/" />
     <Folder Include="Logs/" />
-    <Folder Include="Utils/" />
-    <Folder Include="Utils/Interfaces/" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="3.2.0" />

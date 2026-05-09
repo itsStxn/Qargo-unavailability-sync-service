@@ -4,7 +4,6 @@ using Root.DTOs;
 using Root.Errors;
 using System.Text.Json;
 using Root.Utils.Interfaces;
-using static Root.Constants;
 
 namespace Root.Utils;
 
@@ -12,7 +11,7 @@ namespace Root.Utils;
 /// Provides utilities for caching, retrieving, and printing access token data.
 /// Handles JSON serialization and deserialization for cached token storage.
 /// </summary>
-public class AccessTokenUtil : IAccessTokenUtil {
+public class AccessTokenUtil : JsonUtil, IAccessTokenUtil {
 
 	/// <summary>
 	/// The file path used to persist the cached access token.
@@ -101,38 +100,7 @@ public class AccessTokenUtil : IAccessTokenUtil {
 		};
 
 		// ? Rewrite cache
-		var json = JsonSerializer.Serialize(data, JSON_OPTIONS);
+		var json = ToPrettyJson(data);
 		File.WriteAllText(_filePath, json);
-	}
-
-	/// <summary>
-	/// Serializes the provided object into formatted JSON,
-	/// and returns the serialized string.
-	/// </summary>
-	/// <typeparam name="T">
-	/// The type of object to serialize.
-	/// </typeparam>
-	/// <param name="data">
-	/// The object instance to serialize and print.
-	/// </param>
-	/// <param name="print">
-	/// If true, prints the resulting JSON to the console output.
-	/// </param>
-	/// <returns>
-	/// A formatted JSON string representation of the provided object.
-	/// </returns>
-	/// <exception cref="ParseException">
-	/// Thrown when serialization fails due to invalid JSON formatting.
-	/// </exception>
-	public static string ToPrettyJson<T>(T data, bool print = false) {
-		// ? Json serialization
-		try {
-			var json = JsonSerializer.Serialize(data, JSON_OPTIONS);
-			if (print) Console.WriteLine(json);
-			return json;
-		}
-		catch (JsonException ex) {
-			throw new ParseException("JSON is badly formatted", ex);
-		}
 	}
 }
