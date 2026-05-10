@@ -70,13 +70,14 @@ public class UActions : IUActions {
 		var a = unavail;
 		var b = ToCreate[externalId];
 
-		ToCreate.Remove(externalId); // ? Move unavailability
+		ToCreate.Remove(externalId); // ? Prepare to move unavailability
 
 		if (a.Reason      != b.Reason
 		||  a.Description != b.Description
 		||  a.StartTime   != b.StartTime
 		||  a.EndTime     != b.EndTime) {
-
+			
+			// ? Move unavailability to update action
 			b.ExternalId = a.ExternalId; // ? Ensure they have same external id
 			ToUpdate.Add(unavailId, b); // ? Use unavail id of qargo =>
 												 // ? Update request done in the qargo tenant by that key
