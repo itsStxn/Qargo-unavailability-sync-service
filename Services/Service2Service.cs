@@ -33,8 +33,8 @@ public class Service2Service : Base, IInteractService {
 	/// <param name="master">
 	/// The <see cref="MasterService"/> responsible for interacting with the Master tenant.
 	/// </param>
-	public Service2Service(QargoService qargo, MasterService master) {
-		_name = "Service2Service";
+	public Service2Service(QargoService qargo, MasterService master) : base(
+		name: "Service2Service") {
 		_qargo = qargo;
 		_master = master;
 	}

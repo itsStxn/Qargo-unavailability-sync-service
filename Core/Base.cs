@@ -12,17 +12,17 @@ public class Base {
 	/// <summary>
 	/// Gets the logger instance used for logging operations within this class.
 	/// </summary>
-	private readonly ILogger Logger;
+	private readonly ILogger _logger;
 
 	/// <summary>The name of the service, used as a prefix in log messages.</summary>
-	protected string _name;
+	private readonly string _name;
 
 
 	/// <summary>
 	/// Initializes a new instance of <see cref="Base"/> with the service name set to <c>"None"</c>.
 	/// </summary>
 	public Base() {
-		Logger = Log.ForContext(GetType());
+		_logger = Log.ForContext(GetType());
 		_name = "None";
 	}
 
@@ -31,7 +31,7 @@ public class Base {
 	/// </summary>
 	/// <param name="name">The name of the service to include in log message prefixes.</param>
 	protected Base(string name) {
-		Logger = Log.ForContext(GetType());
+		_logger = Log.ForContext(GetType());
 		_name = name;
 	}
 
@@ -41,7 +41,7 @@ public class Base {
 	/// </summary>
 	/// <param name="text">The text to normalize.</param>
 	/// <returns>A normalized string with leading/trailing whitespace removed and converted to lowercase.</returns>
-	protected string Normalize(string text) {
+	protected static string Normalize(string text) {
 		return text.Trim().ToLowerInvariant();
 	}
 
@@ -66,7 +66,7 @@ public class Base {
 	/// </summary>
 	/// <param name="text">The message to log.</param>
 	public void Echo(string text) {
-		Logger.Information(Msg(text));
+		_logger.Information(Msg(text));
 	}
 
 	/// <summary>
@@ -74,7 +74,7 @@ public class Base {
 	/// </summary>
 	/// <param name="text">The message to log.</param>
 	public void Warn(string text) {
-		Logger.Warning(Msg(text));
+		_logger.Warning(Msg(text));
 	}
 
 	/// <summary>
@@ -82,6 +82,6 @@ public class Base {
 	/// </summary>
 	/// <param name="text">The message to log.</param>
 	public void Error(string text) {
-		Logger.Error(Msg(text));
+		_logger.Error(Msg(text));
 	}
 }

@@ -27,19 +27,38 @@ public class MyRequest : Base, IMyRequest {
 	/// and retry logging handled by <see cref="OnRetryAsync"/>.
 	/// </summary>
 	/// <param name="http">The <see cref="HttpSource"/> instance to use for all requests.</param>
-	public MyRequest(HttpSource http) {
+	public MyRequest(HttpSource http) : base() {
 		_http = http;
-		_retryPolicy = Policy
+		_retryPolicy = BuildRetryPolicy(http);
+	}
+
+	/// <summary>
+	/// Initializes a new instance of <see cref="MyRequest"/> and configures the retry policy.
+	/// Retries are triggered on <see cref="NetworkException"/>, with delays provided by <see cref="Timeout"/>
+	/// and retry logging handled by <see cref="OnRetryAsync"/>.
+	/// </summary>
+	/// <param name="http">The <see cref="HttpSource"/> instance to use for all requests.</param>
+	/// <param name="name">The service name passed to <see cref="Base"/> for log message prefixing.</param>
+	protected MyRequest(HttpSource http, string name) : base(name) {
+		_http = http;
+		_retryPolicy = BuildRetryPolicy(http);
+	}
+
+
+	/// <summary>
+	/// Builds an asynchronous retry policy for handling network exceptions with exponential backoff.
+	/// </summary>
+	private AsyncRetryPolicy BuildRetryPolicy(HttpSource http) {
+		return Policy
 			.Handle<NetworkException>()
 			.WaitAndRetryAsync(
-				retryCount: _http.Retry.MaxAttempts,
+				retryCount: http.Retry.MaxAttempts,
 				sleepDurationProvider: (attempt, ex, ctx) => 
 					Timeout(attempt, ex),
 				onRetryAsync: async (ex, delay, attempt, ctx) => 
 					await OnRetryAsync(ex, delay)
 			);
 	}
-
 
 	/// <summary>
 	/// Constructs the full absolute URI by combining the <see cref="HttpSource.Cli"/>'s base address

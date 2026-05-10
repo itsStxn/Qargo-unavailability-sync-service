@@ -37,12 +37,11 @@ public class MyAuthRequest : MyRequest {
 	/// <param name="clientId">The OAuth2 client ID.</param>
 	/// <param name="secret">The OAuth2 client secret.</param>
 	/// <param name="http">The <see cref="HttpSource"/> instance to use for all requests.</param>
-	public MyAuthRequest(string name, string clientId, string secret, HttpSource http) : base(http) {
+	public MyAuthRequest(string name, string clientId, string secret, HttpSource http) : base(http, name) {
 		_atu = new AccessTokenUtil(name);
 		_accessToken = _atu.ReadCache();
 		_clientId = clientId;
 		_secret = secret;
-		_name = name;
 	}
 
 

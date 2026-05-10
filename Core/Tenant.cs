@@ -32,12 +32,11 @@ public class Tenant : Base, ITenant {
 	/// <summary>
 	/// Initializes a new instance of <see cref="Tenant"/> with the given credentials and HTTP client.
 	/// </summary>
-	/// <param name="name">The tenant's service name, used for log message prefixing.</param>
+	/// <param name="name">The service name passed to <see cref="Base"/> for log message prefixing.</param>
 	/// <param name="clientIdEnv">Name of the following envaronment variable: OAuth2 client ID for authentication.</param>
 	/// <param name="secretEnv">Name of the following envaronment variable: OAuth2 client secret for authentication.</param>
 	/// <param name="ctx">Application context providing shared services such as HTTP client and environment variable access.</param>
-	public Tenant(string name, string clientIdEnv, string secretEnv, Context ctx) {
-		_name = name;
+	public Tenant(string name, string clientIdEnv, string secretEnv, Context ctx) : base(name) {
 		_ctx = ctx;
 		_ambiguousResources = [];
 		_auth = new MyAuthRequest(
