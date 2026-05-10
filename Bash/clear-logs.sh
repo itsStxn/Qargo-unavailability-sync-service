@@ -11,6 +11,6 @@ cd "$PROJECT_DIR" || {
 	exit 1
 }
 
-trash "$PROJECT_DIR/Logs/"*.log
+trash -f "$PROJECT_DIR/Logs/"*.log
 
 echo "✅ Project logs have been cleared"

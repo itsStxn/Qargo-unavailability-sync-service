@@ -11,7 +11,7 @@ cd "$PROJECT_DIR" || {
 	exit 1
 }
 
-trash obj bin
+trash -f obj bin
 
 dotnet publish \
 	./*.csproj \
