@@ -2,9 +2,14 @@
 
 #? Clear project's logs
 
+set -euo pipefail
+
 PROJECT_DIR="$HOME/Dev/projects/Qargo Unavailability Sync Service"
 
-cd "$PROJECT_DIR" || echo "Project directory not found: \"$PROJECT_DIR\"" && exit 1
+cd "$PROJECT_DIR" || {
+	echo "Project directory not found: $PROJECT_DIR"
+	exit 1
+}
 
 trash "$PROJECT_DIR/Logs/"*.log
 

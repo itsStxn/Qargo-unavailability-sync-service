@@ -6,8 +6,6 @@ Logs/
 obj/
 bin/
 publish/
-cron.sh
-publish.sh
 
 ############################
 # Operating System files
