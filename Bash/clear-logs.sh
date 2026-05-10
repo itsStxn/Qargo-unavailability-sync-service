@@ -1,15 +1,37 @@
 #!/bin/bash
 
-#? Clear project's logs
+# ? Clear project's logs
+
+########################################
+# * SETTINGS / SAFETY
+########################################
 
 set -euo pipefail
 
-PROJECT_DIR="$HOME/Dev/projects/Qargo Unavailability Sync Service"
 
-cd "$PROJECT_DIR" || {
-	echo "Project directory not found: $PROJECT_DIR"
-	exit 1
+########################################
+# * ERROR HANDLING
+########################################
+
+on_error() {
+	echo "❌ Project logs have not been cleared"
 }
+
+trap on_error ERR
+
+
+########################################
+# * VARIABLES
+########################################
+
+PROJECT_DIR="$HOME/Dev/projects/Qargo Unavailability Sync Services"
+
+
+########################################
+# * MAIN LOGIC
+########################################
+
+cd "$PROJECT_DIR"
 
 trash -f "$PROJECT_DIR/Logs/"*.log
 
