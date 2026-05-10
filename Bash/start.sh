@@ -25,7 +25,7 @@ trap on_error ERR
 # * VARIABLES
 ########################################
 
-PROJECT_DIR="$HOME/Dev/projects/Qargo Unavailability Sync Services"
+PROJECT_DIR="$HOME/Dev/projects/Qargo Unavailability Sync Service"
 
 
 ########################################
