@@ -260,10 +260,14 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
   PROJECT_DIR="/absolute/path/to/project"
 
-  cd "$PROJECT_DIR" || exit 1
+  cd "$PROJECT_DIR" || echo "Project directory not found: \"$PROJECT_DIR\"" && exit 1
+
+  echo "Starting project..."
   
   flock -n /tmp/qargo-sync.lock \
   dotnet "/absolute/path/to/project/publish/QargoUnavailabilitySyncService.dll"
+  
+  echo "✅ Project has run successfully"
   ```
 
   Then register it in `crontab`:
