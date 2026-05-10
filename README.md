@@ -224,6 +224,10 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
   This generates a deployment-ready output inside the `publish/` directory, including the application DLL and all required runtime configuration files.
 
+  >**Note**: `-c Release` enables the optimized build configuration intended for deployment. Without it, you may get a Debug build (depending on SDK/version/context), which is slower and less optimized.
+
+  >**Note**: I spefified the deployment for 64 bit Linux using `-r linux-x64`, but feel free to omit it.
+
 ---
 
 * **Run the published service manually** to validate the deployment output before automating execution:
