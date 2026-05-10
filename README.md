@@ -249,21 +249,23 @@ dotnet publish -c Release -r linux-x64 --self-contained false -o out
 
 * **Recommended setup**
 
-  Create a dedicated `cron.sh` script:
+  Create a dedicated `start.sh` script:
 
   ```bash
   #!/bin/bash
 
-  cd "/absolute/path/to/project" || exit 1
+  PROJECT_DIR="/absolute/path/to/project"
 
+  cd "$PROJECT_DIR" || exit 1
+  
   flock -n /tmp/qargo-sync.lock \
-  /usr/bin/dotnet "/absolute/path/to/project/publish/QargoUnavailabilitySyncService.dll"
+  dotnet "/absolute/path/to/project/publish/QargoUnavailabilitySyncService.dll"
   ```
 
   Then register it in `crontab`:
 
   ```bash
-  */10 * * * * /bin/bash "/absolute/path/to/project/cron.sh" >> "/absolute/path/to/project/Logs/myapp.log" 2>&1
+  */10 * * * * /bin/bash "/absolute/path/to/project/start.sh" >> "/absolute/path/to/project/Logs/app-cron.log" 2>&1
   ```
 
 ---
