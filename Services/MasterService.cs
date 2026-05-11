@@ -71,10 +71,11 @@ public class MasterService : Tenant, IResourseMap {
 			DetermineAmbiguity(resources);
 
 			foreach (var r in resources) {
+				string name = Normalize(r.Name);
 
 				// ? Resource already marked as ambiguous
-				if (_ambiguousResources.Contains(r.Name)) {
-					Warn($"Multiple target resources found for '{r.Name}'. Sync skipped due to ambiguous mapping.");
+				if (_ambiguousResources.Contains(name)) {
+					Warn($"Multiple target resources found for '{name}'. Sync skipped due to ambiguous mapping.");
 					continue;
 				}
 
@@ -91,7 +92,7 @@ public class MasterService : Tenant, IResourseMap {
 					}
 
 					// ? Map names to actions
-					ResourceMap.Add(r.Name, (r.Id, actions));
+					ResourceMap.Add(name, (r.Id, actions));
 				}
 			}
 

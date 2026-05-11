@@ -56,14 +56,14 @@ public class UActions : IUActions {
 		string externalId = unavail.ExternalId
 			?? throw new ConfigException("Input unavailability external id must be not null");
 
+		// ? Nothing to change
+		if (!ToCreate.ContainsKey(externalId)) return;
+
 		// ? Validate uniqueness
 		string unavailId = unavail.Id;
 
 		if (ToUpdate.ContainsKey(unavailId))
 			throw new ConfigException("Input unavailability id must be unique");
-
-		// ? Nothing to change
-		if (!ToCreate.ContainsKey(externalId)) return;
 
 		// ? If the existing unavailability differs
 		// ? from the incoming one, mark it for update

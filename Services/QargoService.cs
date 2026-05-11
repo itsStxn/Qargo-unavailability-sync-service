@@ -65,16 +65,17 @@ public class QargoService : Tenant, IResourseMap {
 			DetermineAmbiguity(resources);
 
 			foreach (var r in resources) {
+				string name = Normalize(r.Name);
 
 				// ? Resource already marked as ambiguous
-				if (_ambiguousResources.Contains(r.Name)) {
-					Warn($"Multiple target resources found for '{r.Name}'. Sync skipped due to ambiguous mapping.");
+				if (_ambiguousResources.Contains(name)) {
+					Warn($"Multiple target resources found for '{name}'. Sync skipped due to ambiguous mapping.");
 					continue;
 				}
 
 				// ? Map resource names to unavailabilities
 				var unavails = await GetUnavailabilitiesAsync(r.Id);
-				ResourceMap.Add(r.Name, (r.Id, unavails));
+				ResourceMap.Add(name, (r.Id, unavails));
 			}
 			
 			Echo("Successfully mapped resources to unavailabilities");
